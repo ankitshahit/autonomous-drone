@@ -3,6 +3,7 @@ package org.drone.robot.engine.factory;
 import java.util.List;
 
 import org.drone.robot.engine.exception.GpioException;
+import org.drone.robot.engine.views.GeneralGpioView;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
@@ -97,6 +98,11 @@ public class Pi4jFactory {
 			List<GpioPinListenerDigital> listener) {
 		input.removeListener(listener);
 
+	}
+
+	public static GpioPinDigitalInput registerDigitalInputPin(
+			GeneralGpioView view) {
+		return reserveGpioPinAsDigitalInputBy(view.getPin());
 	}
 
 }
