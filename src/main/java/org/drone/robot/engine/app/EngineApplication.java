@@ -10,7 +10,8 @@ public class EngineApplication {
 			InterruptedException {
 
 		System.out.println("Total number of output address(es) provided: "
-				+ args);
+				+ args[0]);
+
 		Integer[] address = new Integer[args.length];
 		for (int index = 0; index < args.length; index++) {
 			address[index] = Integer.parseInt(args[index]);
@@ -21,10 +22,12 @@ public class EngineApplication {
 		outputPins = Pi4jFactory.registerAllDigitalOutputPins(address);
 		System.out.println("output : " + outputPins);
 		for (GpioPinDigitalOutput gpioPinDigitalOutput : outputPins) {
-			gpioPinDigitalOutput.blink(300);
+			gpioPinDigitalOutput.high();
 			Thread.sleep(300);
+			gpioPinDigitalOutput.low();
 		}
-	
+
 		System.out.println("Terminating program.");
+		Pi4jFactory.getInstance().shutdown();
 	}
 }
