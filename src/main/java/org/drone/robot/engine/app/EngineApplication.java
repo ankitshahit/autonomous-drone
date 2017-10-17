@@ -10,6 +10,7 @@ public class EngineApplication {
 			InterruptedException {
 		System.out.println("Total number of output address(es) provided: "
 				+ args);
+
 		Integer[] address = new Integer[args.length];
 		for (int index = 0; index < args.length; index++) {
 			address[index] = Integer.parseInt(args[index]);
@@ -18,7 +19,7 @@ public class EngineApplication {
 		GpioPinDigitalOutput[] outputPins = new GpioPinDigitalOutput[address.length];
 
 		outputPins = Pi4jFactory.registerAllDigitalOutputPins(address);
-
+		System.out.println("output pins : "+outputPins);
 		for (GpioPinDigitalOutput gpioPinDigitalOutput : outputPins) {
 			gpioPinDigitalOutput.blink(300);
 			Thread.sleep(300);
