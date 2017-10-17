@@ -24,6 +24,7 @@ public class EngineApplication {
 			gpioPinDigitalOutput.blink(300);
 			Thread.sleep(300);
 		}
+	
 		System.out.println("Terminating program.");
 	}
 }
