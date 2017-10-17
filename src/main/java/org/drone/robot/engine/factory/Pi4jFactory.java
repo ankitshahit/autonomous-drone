@@ -143,9 +143,7 @@ public class Pi4jFactory {
 			registeredPin = reserveGpioPinDigitalOutput(pins[index]);
 			outputRegistered[index] = registeredPin;
 		}
-		pins = null;
-		registeredPin = null;
-		address = null;
+
 		return outputRegistered;
 	}
 

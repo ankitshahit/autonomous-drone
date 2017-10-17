@@ -19,32 +19,34 @@ public class EngineApplication {
 		for (int index = 0; index < args.length; index++) {
 			address[index] = Integer.parseInt(args[index]);
 		}
-		GpioController controller = GpioFactory.getInstance();
-		GpioPinDigitalOutput output = controller
-				.provisionDigitalOutputPin(RaspiPin.GPIO_24);
-
-		System.out.println("toggling state");
-		output.toggle();
-		System.out.println("Sleeping thread for 300 milliseconds");
-
-		Thread.sleep(300);
-		System.out.println("setting it to high");
-		output.high();
-		System.out.println("Sleeping thread for 300 milliseconds");
-		Thread.sleep(300);
-		GpioFactory.getInstance().shutdown();
 		/*
-		 * GpioPinDigitalOutput[] outputPins = new
-		 * GpioPinDigitalOutput[address.length];
+		 * GpioController controller = GpioFactory.getInstance();
+		 * GpioPinDigitalOutput output = controller
+		 * .provisionDigitalOutputPin(RaspiPin.GPIO_24);
 		 * 
-		 * outputPins = Pi4jFactory.registerAllDigitalOutputPins(address);
-		 * System.out.println("output : " + outputPins.length); for
-		 * (GpioPinDigitalOutput gpioPinDigitalOutput : outputPins) {
-		 * System.out.println("inside loop"); gpioPinDigitalOutput.high();
-		 * Thread.sleep(300); gpioPinDigitalOutput.low(); }
+		 * System.out.println("toggling state"); output.toggle();
+		 * System.out.println("Sleeping thread for 300 milliseconds");
 		 * 
-		 * System.out.println("Terminating program.");
-		 * Pi4jFactory.getInstance().shutdown();
-		 */
+		 * Thread.sleep(300); System.out.println("setting it to high");
+		 * output.high();
+		 * System.out.println("Sleeping thread for 300 milliseconds");
+		 * Thread.sleep(300); GpioFactory.getInstance().shutdown();
+		 */GpioPinDigitalOutput[] outputPins = new GpioPinDigitalOutput[address.length];
+
+		outputPins = Pi4jFactory.registerAllDigitalOutputPins(address);
+		System.out.println("output : " + outputPins.length);
+		for (GpioPinDigitalOutput gpioPinDigitalOutput : outputPins) {
+
+			System.out.println("turning state to high");
+			gpioPinDigitalOutput.high();
+			System.out.println("sleeping for 300 seconds");
+			Thread.sleep(300);
+			gpioPinDigitalOutput.low();
+			System.out.println("sleeping state for low");
+		}
+
+		System.out.println("Terminating program.");
+		Pi4jFactory.getInstance().shutdown();
+
 	}
 }
