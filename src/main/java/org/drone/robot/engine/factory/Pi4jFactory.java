@@ -15,7 +15,7 @@ import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
 public class Pi4jFactory {
-	private static GpioController controller;
+	private static final GpioController CONTROLLER = GpioFactory.getInstance();
 
 	public static <T> void validateConvertToAddressPin(Integer[] address)
 			throws GpioException {
@@ -60,7 +60,8 @@ public class Pi4jFactory {
 		try {
 			Pin pin = null;
 			for (int index = 0; index < address.length; index++) {
-				pin = getPinByAddress(index);
+				System.out.println("Address received: " + address[index]);
+				pin = getPinByAddress(address[index]);
 				raspiPins[index] = pin;
 			}
 
@@ -76,35 +77,33 @@ public class Pi4jFactory {
 	 * @return
 	 */
 	public static GpioController getInstance() {
-		if (controller == null) {
-			controller = GpioFactory.getInstance();
-		}
-		return controller;
+
+		return CONTROLLER;
 	}
 
 	/**
 	 * GPIOCOntroller need to be shutdown at the end of execution.
 	 */
 	public static void consumeGpioFactory() {
-		if (controller == null) {
+		if (CONTROLLER == null) {
 			return;
 		}
-		controller.shutdown();
+		CONTROLLER.shutdown();
 	}
 
 	public static GpioPinDigitalInput reserveGpioPinAsDigitalInputBy(Pin pin) {
-		if (controller == null) {
+		if (CONTROLLER == null) {
 			getInstance();
 		}
 
-		return controller.provisionDigitalInputPin(pin, pin.getName());
+		return CONTROLLER.provisionDigitalInputPin(pin, pin.getName());
 	}
 
 	public static GpioPinDigitalOutput reserveGpioPinDigitalOutput(Pin pin) {
-		if (controller == null) {
+		if (CONTROLLER == null) {
 			getInstance();
 		}
-		return controller.provisionDigitalOutputPin(pin);
+		return CONTROLLER.provisionDigitalOutputPin(pin);
 	}
 
 	public static void addListenerToDigitalPin(GpioPinDigitalInput input,
