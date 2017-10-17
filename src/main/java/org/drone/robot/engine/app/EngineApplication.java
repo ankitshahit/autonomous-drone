@@ -20,8 +20,9 @@ public class EngineApplication {
 		GpioPinDigitalOutput[] outputPins = new GpioPinDigitalOutput[address.length];
 
 		outputPins = Pi4jFactory.registerAllDigitalOutputPins(address);
-		System.out.println("output : " + outputPins);
+		System.out.println("output : " + outputPins.length);
 		for (GpioPinDigitalOutput gpioPinDigitalOutput : outputPins) {
+			System.out.println("inside loop");
 			gpioPinDigitalOutput.high();
 			Thread.sleep(300);
 			gpioPinDigitalOutput.low();
