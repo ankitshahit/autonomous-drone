@@ -5,7 +5,7 @@ import com.pi4j.io.gpio.Pin;
 public class GeneralGpioView {
 	private Pin pin;
 	private String name;
-	private Long coords;
+	private long coords;
 	private String direction;
 	
 	/**
