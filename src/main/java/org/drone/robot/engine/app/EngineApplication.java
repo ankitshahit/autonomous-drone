@@ -31,7 +31,9 @@ public class EngineApplication {
 		 * output.high();
 		 * System.out.println("Sleeping thread for 300 milliseconds");
 		 * Thread.sleep(300); GpioFactory.getInstance().shutdown();
-		 */GpioPinDigitalOutput[] outputPins = new GpioPinDigitalOutput[address.length];
+		 */
+		Pi4jFactory.getInstance();
+		GpioPinDigitalOutput[] outputPins = new GpioPinDigitalOutput[address.length];
 
 		outputPins = Pi4jFactory.registerAllDigitalOutputPins(address);
 		System.out.println("output : " + outputPins.length);
