@@ -8,10 +8,9 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 public class EngineApplication {
 	public static void main(String[] args) throws GpioException,
 			InterruptedException {
-		System.out.println("Application has started ");
+
 		System.out.println("Total number of output address(es) provided: "
 				+ args);
-
 		Integer[] address = new Integer[args.length];
 		for (int index = 0; index < args.length; index++) {
 			address[index] = Integer.parseInt(args[index]);
