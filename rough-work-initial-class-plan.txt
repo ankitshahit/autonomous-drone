@@ -1,0 +1,83 @@
+
+interface Agent
+	void addSensor(Sensors[],Direction);	//-- which side the sensor belongs to
+	void removeSensor(Sensors[],Direction);
+
+	boolean allClearForRightDirection();
+	boolean allClearForLeftDirection();
+	boolean allClearForForwardDirection();
+	boolean allClearForReverseDirection();
+	boolean allClearForForwardRightDirection();
+	boolean allClearForForwardLeftDirection();
+	boolean allClearForReverseRightDirection();
+	boolean allClearForReverseLeftDirection();
+
+
+interface Queue
+void push(Instruction);	 	
+Instruction pop();
+void rePush(Instruction);
+void remove(Instruction);
+void push(Instruction,Long timeStart,Long timeEnd);
+
+
+interface Motor
+	void addMotor(MotorImpl,Direction);
+	void removeMotor();
+	void addMotor(MotorImpl);
+	void addDirection(Direction);
+	void startEngine(Motor);
+	void stopEngine(Motor);
+	
+
+
+interface Driver
+
+	void driveRight();
+	void driveLeft();
+	void driveForward();
+	void driveReverse();
+
+	void driveForwardRight();
+	void driveForwardLeft();
+
+	void driveReverseRight();
+	void driveReverseLeft();
+
+	void speed(Long speed);
+	void increaseSpeed();
+	void increaseSpeed(Long addSpeedByPerKm);
+	
+	void decreaseSpeed();
+	void decreaseSpeed(Long decreaseSpeedByPerKm);
+	
+	void stop();
+	void start();
+
+
+	void halt(Long delay);
+	void addMotors(Map<Motors,Direction>data);
+	
+	
+
+interface Sensors
+	void addSensorImpl(SensorListenerImpl);
+	void addDriverManager(Driver);
+	
+abstract class extended in sensorListenerImpl class	void high();
+abstract class extended in sensorListenerImpl class	void low();
+abstract class extended in sensorListenerImpl class	void toggle();
+
+abstract class extended in sensorListenerImpl class	Map<String,Object> getSensorData();
+abstract class extended in sensorListenerImpl class	boolean notifyImmediateHalt();
+
+	void register()
+	void deregister()
+
+
+/*
+* Controls Agent, Queue, Driver
+*
+*/
+DriverManager 
+	
